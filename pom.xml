@@ -164,12 +164,6 @@
             <version>${spring-version}</version>
         </dependency>
         <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-            <version>1.9.7</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>${spring-version}</version>
@@ -182,10 +176,11 @@
             <version>${spring-version}</version>
         </dependency>
         <dependency>
-            <groupId>aopalliance</groupId>
-            <artifactId>aopalliance</artifactId>
-            <version>1.0</version>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
+            <type>jar</type>
             <scope>runtime</scope>
+            <version>${spring-version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -302,58 +297,6 @@
                     <configuration>
                         <release>11</release>
                         <compilerArgument/>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>tomcat-maven-plugin</artifactId>
-                    <version>1.1</version>
-                    <configuration>
-                        <url>http://localhost:8080/manager/text</url>
-                        <server>tomcat</server>
-                        <path>/food</path>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.tomcat.maven</groupId>
-                    <artifactId>tomcat7-maven-plugin</artifactId>
-                    <version>2.2</version>
-                    <configuration>
-                        <!-- http port -->
-                        <port>8080</port>
-                        <!-- application path always starts with /-->
-                        <path>/</path>
-                        <!-- optional path to a context file -->
-                        <contextFile>${tomcatContextXml}</contextFile>
-                        <!-- optional system propoerties you want to add -->
-                        <systemProperties>
-                            <appserver.base>${project.build.directory}/appserver-base</appserver.base>
-                            <appserver.home>${project.build.directory}/appserver-home</appserver.home>
-                            <derby.system.home>${project.build.directory}/appserver-base/logs</derby.system.home>
-                            <java.io.tmpdir>${project.build.directory}</java.io.tmpdir>
-                        </systemProperties>
-                        <!-- if you want to use test dependencies rather than only runtime -->
-                        <useTestClasspath>false</useTestClasspath>
-                        <!-- optional if you want to add some extra directories into the classloader -->
-                        <additionalClasspathDirs>
-                            <additionalClasspathDir/>
-                        </additionalClasspathDirs>
-                    </configuration>
-                    <!-- For any extra dependencies needed when running embedded Tomcat (not WAR dependencies) add them below -->
-                    <dependencies/>
-                </plugin>
-                <plugin>
-                    <groupId>org.mortbay.jetty</groupId>
-                    <artifactId>maven-jetty-plugin</artifactId>
-                    <version>6.1.10</version>
-                    <configuration>
-                        <scanIntervalSeconds>10</scanIntervalSeconds>
-                        <connectors>
-                            <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-                                <port>8080</port>
-                                <maxIdleTime>60000</maxIdleTime>
-                            </connector>
-                        </connectors>
                     </configuration>
                 </plugin>
             </plugins>
