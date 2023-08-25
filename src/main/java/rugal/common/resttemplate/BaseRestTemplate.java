@@ -40,7 +40,7 @@ public abstract class BaseRestTemplate
     protected <T> T execute(Map<String, String> parameters, Class<T> responseType)
     {
         String url = requestURL(parameters);
-        if (StringUtils.isEmpty(url))
+        if (url.isEmpty())
         {
             return null;
         }
@@ -57,7 +57,7 @@ public abstract class BaseRestTemplate
     private String requestURL(Map<String, String> parameters)
     {
         StringBuilder baseURL = new StringBuilder(getBaseURL());
-        if (StringUtils.isEmpty(baseURL.toString()))
+        if (baseURL.toString().isEmpty())
         {
             return null;
         }

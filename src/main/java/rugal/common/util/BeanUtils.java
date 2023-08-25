@@ -1,10 +1,11 @@
 package rugal.common.util;
 
+import org.springframework.util.Assert;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.util.Locale;
-import org.springframework.util.Assert;
 
 /**
  * Bean utility to update bean without getter and setter.
@@ -82,7 +83,7 @@ public class BeanUtils
      */
     protected static Field getDeclaredField(final Object object, final String fieldName)
     {
-        Assert.notNull(object);
+        Assert.notNull(object, "Declared field is null");
 
         return getDeclaredField(object.getClass(), fieldName);
     }
@@ -96,8 +97,8 @@ public class BeanUtils
      */
     protected static Field getDeclaredField(final Class clazz, final String fieldName)
     {
-        Assert.notNull(clazz);
-        Assert.hasText(fieldName);
+        Assert.notNull(clazz, "Declared field is null");
+        Assert.hasText(fieldName, "Declared String is empty/has no text");
 
         //traverse all declared field from inheritence
         for (Class superClass = clazz; superClass != Object.class; superClass = superClass

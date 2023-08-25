@@ -1,5 +1,6 @@
 package rugal.sample.controller;
 
+import java.io.FileNotFoundException;
 import java.text.MessageFormat;
 import javax.servlet.http.HttpServletRequest;
 import org.hibernate.TypeMismatchException;
@@ -18,11 +19,9 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.support.MissingServletRequestPartException;
-import org.springframework.web.servlet.mvc.multiaction.NoSuchRequestHandlingMethodException;
 import rugal.sample.common.Message;
 
 /**
@@ -48,25 +47,7 @@ public class ExceptionAction
     private static final String INTERNAL_SERVER_ERROR = "500 (Internal Server Error)";
 
     private static final Logger LOG = LoggerFactory.getLogger(ExceptionAction.class.getName());
-
-    /**
-     *
-     * This method is to address no handler request, throw exception into 404 exception advisor
-     *
-     * @param request
-     * @return
-     * @throws org.springframework.web.servlet.mvc.multiaction.NoSuchRequestHandlingMethodException
-     */
-    @RequestMapping()
-    public Object PathNotFoundHandler(HttpServletRequest request) throws NoSuchRequestHandlingMethodException
-    {
-        LOG
-            .warn(MessageFormat
-                .format("{0} occured, request URL: {1}, request host: {2}", NOT_FOUND, request
-                    .getRequestURI(), request.getRemoteAddr()));
-        throw new NoSuchRequestHandlingMethodException(request);
-    }
-
+    
     /**
      * Mapping for 400
      *

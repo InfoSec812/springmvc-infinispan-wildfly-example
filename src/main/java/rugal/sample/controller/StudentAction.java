@@ -21,8 +21,12 @@ public class StudentAction
 
     private static final Logger LOG = LoggerFactory.getLogger(StudentAction.class.getName());
 
-    @Autowired
     private StudentService studentService;
+    
+    public StudentAction(StudentService studentService) {
+        super();
+        this.studentService = studentService;
+    }
 
     @ResponseBody
     @RequestMapping(method = RequestMethod.POST)

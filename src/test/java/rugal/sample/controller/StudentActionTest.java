@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import rugal.ControllerClientSideTestBase;
 import rugal.sample.common.Message;
 import rugal.sample.core.entity.Student;
+import rugal.sample.core.service.StudentService;
 
 /**
  *
@@ -18,6 +19,9 @@ public class StudentActionTest extends ControllerClientSideTestBase
 
     @Autowired
     private StudentAction studentAction;
+    
+    @Autowired
+    private StudentService studentService;
 
     public StudentActionTest()
     {
@@ -40,7 +44,7 @@ public class StudentActionTest extends ControllerClientSideTestBase
         System.out.println("updateStudentProfile");
         Integer id = null;
         Student bean = null;
-        StudentAction instance = new StudentAction();
+        StudentAction instance = new StudentAction(studentService);
         Message expResult = null;
         Message result = instance.updateStudentProfile(id, bean);
     }
@@ -50,7 +54,7 @@ public class StudentActionTest extends ControllerClientSideTestBase
     {
         System.out.println("cancelOrder");
         Integer id = null;
-        StudentAction instance = new StudentAction();
+        StudentAction instance = new StudentAction(studentService);
         Message expResult = null;
         Message result = instance.cancelOrder(id);
     }
@@ -60,7 +64,7 @@ public class StudentActionTest extends ControllerClientSideTestBase
     {
         System.out.println("retrieve");
         Integer id = null;
-        StudentAction instance = new StudentAction();
+        StudentAction instance = new StudentAction(studentService);
         Message expResult = null;
         Message result = instance.retrieve(id);
     }

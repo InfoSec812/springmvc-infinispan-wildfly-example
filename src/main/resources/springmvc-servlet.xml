@@ -27,12 +27,6 @@
     <!-- scanning annotation based package -->
     <context:component-scan base-package="rugal.sample.controller"/>
 
-    <!-- Mapping annotation on POJO -->
-    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
-    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" >
-        <property name="useDefaultSuffixPattern" value="false"/>
-    </bean>
-
     <!-- define the REST content negotiating view resolver -->
     <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
         <property name="favorPathExtension" value="false"/>

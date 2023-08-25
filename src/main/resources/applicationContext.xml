@@ -21,6 +21,9 @@
             http://www.springframework.org/schema/cache
             http://www.springframework.org/schema/cache/spring-cache-3.2.xsd"
 >
+    
+    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate" />
+    
     <bean id="cacheManager" class="org.infinispan.spring.provider.SpringRemoteCacheManagerFactoryBean">
         <property name="configurationPropertiesFileLocation" value="classpath:/infinispan-config-remote.xml" />
     </bean>
@@ -106,7 +109,7 @@
     
 
     <!-- Hibernate session factory -->
-    <bean name="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+    <bean name="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
         <property name="packagesToScan">
             <list>
@@ -133,7 +136,7 @@
 
 
     <!-- transaction manager -->
-    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
     
