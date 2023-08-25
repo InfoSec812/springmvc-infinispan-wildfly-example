@@ -51,12 +51,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <dependency>
-            <artifactId>guava</artifactId>
-            <groupId>com.google.guava</groupId>
-            <type>jar</type>
-            <version>15.0</version>
-        </dependency>
         <!-- Data Source stop -->
         <!-- Hibernate start-->
         <dependency>
@@ -87,13 +81,6 @@
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <artifactId>dom4j</artifactId>
-            <groupId>dom4j</groupId>
-            <type>jar</type>
-            <version>1.6.1</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
             <artifactId>xml-apis</artifactId>
             <groupId>xml-apis</groupId>
             <version>1.0.b2</version>
@@ -102,12 +89,6 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-            <scope>runtime</scope>
-            <version>${spring-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
             <scope>runtime</scope>
             <version>${spring-version}</version>
         </dependency>
@@ -130,7 +111,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.10</version>
+            <version>4.13.1</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
