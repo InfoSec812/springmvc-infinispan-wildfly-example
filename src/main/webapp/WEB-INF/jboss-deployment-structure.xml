@@ -1,0 +1,8 @@
+<jboss-deployment-structure>
+  <deployment>
+    <dependencies>
+      <module name="org.hibernate" services="import" />
+      <module name="org.infinispan" services="import" />
+    </dependencies>
+  </deployment>
+</jboss-deployment-structure>
