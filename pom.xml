@@ -18,7 +18,8 @@
         <!-- Using utf-8 encoding -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <jboss.home>/home/dphillips/Applications/JBoss/jboss-eap-7.4</jboss.home>
+        <jboss1.home>/home/dphillips/Applications/JBoss/jboss-alpha</jboss1.home>
+        <jboss2.home>/home/dphillips/Applications/JBoss/jboss-beta</jboss2.home>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -227,24 +228,48 @@
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
                 <version>4.2.0.Final</version>
-                <configuration>
-                    <jboss-home>${jboss.home}</jboss-home>
-                    <server-config>standalone-full-ha.xml</server-config>
-<!--                    <name>springmvc-example</name>
-                    <runtime-name>springmvc-example</runtime-name>-->
-                    <add-user>
-                        <users>
-                            <user>
-                                <username>dphillips</username>
-                                <password>password</password>
-                                <groups>
-                                    <group>admin</group>
-                                    <group>user</group>
-                                </groups>
-                            </user>
-                        </users>
-                    </add-user>
-                </configuration>
+                <executions>
+                    <execution>
+                        <id>jboss01</id>
+                        <configuration>
+                            <jboss-home>${jboss1.home}</jboss-home>
+                            <server-config>standalone-full-ha.xml</server-config>
+                            <add-user>
+                                <users>
+                                    <user>
+                                        <username>dphillips</username>
+                                        <password>password</password>
+                                        <groups>
+                                            <group>admin</group>
+                                            <group>user</group>
+                                        </groups>
+                                    </user>
+                                </users>
+                            </add-user>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>jboss02</id>
+                        <configuration>
+                            <jboss-home>${jboss2.home}</jboss-home>
+                            <server-config>standalone-full-ha.xml</server-config>
+                            <javaOpts>-Djboss.socket.binding.port-offset=2000</javaOpts>
+                            <port>11990</port>
+                            <add-user>
+                                <users>
+                                    <user>
+                                        <username>dphillips</username>
+                                        <password>password</password>
+                                        <groups>
+                                            <group>admin</group>
+                                            <group>user</group>
+                                        </groups>
+                                    </user>
+                                </users>
+                            </add-user>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
         <pluginManagement>
