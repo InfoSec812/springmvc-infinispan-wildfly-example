@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss xmlns="urn:jboss:1.0">
+    <shared-session-config xmlns="urn:jboss:shared-session-config:2.0">
+        <distributable/>
+        <session-config>
+            <cookie-config>
+                <path>/</path>
+            </cookie-config>
+        </session-config>
+    </shared-session-config>
+    <distributable-web xmlns="urn:jboss:distributable-web:2.0">
+        <session-management name="default"/>
+    </distributable-web>
+</jboss>
