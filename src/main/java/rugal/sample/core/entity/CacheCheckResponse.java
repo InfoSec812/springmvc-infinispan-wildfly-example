@@ -1,9 +1,10 @@
 package rugal.sample.core.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CacheCheckResponse {
+public class CacheCheckResponse implements Serializable {
 	
 	Long currentTimestamp;
 	

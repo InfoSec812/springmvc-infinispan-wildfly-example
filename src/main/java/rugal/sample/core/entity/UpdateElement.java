@@ -1,6 +1,8 @@
 package rugal.sample.core.entity;
 
-public class UpdateElement {
+import java.io.Serializable;
+
+public class UpdateElement implements Serializable {
 	
 	public UpdateElement(Long currentTimestamp, String currentUrl) {
 		this.requestTimestamp = currentTimestamp;
