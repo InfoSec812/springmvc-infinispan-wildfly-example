@@ -18,16 +18,8 @@
         <!-- Using utf-8 encoding -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <jboss.home>/home/dphillips/Applications/JBoss/jboss-eap-7.4</jboss.home>
     </properties>
-    <repositories>
-        <repository>
-            <id>nexus</id>
-            <layout>default</layout>
-            <url>http://nexus3.cpl:9081/repository/maven-public/</url>
-            <releases><enabled>true</enabled></releases>
-            <snapshots><enabled>true</enabled></snapshots>
-        </repository>
-    </repositories>
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -236,8 +228,10 @@
                 <artifactId>wildfly-maven-plugin</artifactId>
                 <version>4.2.0.Final</version>
                 <configuration>
-                    <jboss-home>/home/dphillips/Applications/JBoss/jboss-eap-7.4</jboss-home>
+                    <jboss-home>${jboss.home}</jboss-home>
                     <server-config>standalone-full-ha.xml</server-config>
+<!--                    <name>springmvc-example</name>
+                    <runtime-name>springmvc-example</runtime-name>-->
                     <add-user>
                         <users>
                             <user>
@@ -250,7 +244,6 @@
                             </user>
                         </users>
                     </add-user>
-                    <feature-pack-location>wildfly-preview@maven(org.jboss.universe:community-universe)</feature-pack-location>
                 </configuration>
             </plugin>
         </plugins>

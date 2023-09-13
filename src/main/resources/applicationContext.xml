@@ -5,6 +5,7 @@
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jee="http://www.springframework.org/schema/jee"
        
        xsi:schemaLocation="
             http://www.springframework.org/schema/beans
@@ -16,7 +17,9 @@
             http://www.springframework.org/schema/mvc
             http://www.springframework.org/schema/mvc/spring-mvc.xsd
             http://www.springframework.org/schema/aop
-            http://www.springframework.org/schema/aop/spring-aop.xsd">
+            http://www.springframework.org/schema/aop/spring-aop.xsd
+            http://www.springframework.org/schema/jee
+        http://www.springframework.org/schema/jee/spring-jee.xsd">
     
     <!-- properties files location -->
     <bean id="propertyConfigurer" class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
@@ -39,28 +42,6 @@
         -->
     </context:component-scan>
 
-
-    <!-- Hikari data source configuration -->
-    <!--
-    <bean name="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
-        <property name="dataSourceClassName" value="org.postgresql.ds.PGSimpleDataSource" />
-        <property name="username" value="postgres" />
-        <property name="password" value="900811" />
-        <property name="dataSourceProperties">
-            <props>
-                <prop key="serverName">localhost</prop>
-                <prop key="databaseName">postgres</prop>
-            </props>
-        </property>
-    </bean>
-    -->
-    <!-- Hikari data source creation -->
-    <!--
-   <bean name="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="shutdown">
-       <constructor-arg ref="hikariConfig"/>
-   </bean>
-    -->
-
     <!-- Do JSON data convertion -->
     <!--<bean id="messageConverters" class="rugal.common.springmvc.converter.json.GsonHttpMessageConverter">-->
     <bean id="messageConverters" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
@@ -72,34 +53,13 @@
         </property>
     </bean>
     
+    <jee:jndi-lookup id="dataSource"
+                     jndi-name="java:jboss/datasources/ExampleDS"
+                     expected-type="javax.sql.DataSource" />
     
-    <!-- RestTemplate for sending HTTP request -->
-    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate" >
-        <!--<constructor-arg ref="httpClientFactory"/>-->
-        <property name="messageConverters" ref="messageConverters" />
-    </bean>
-
-  
-    
-    <!-- data source configuration with BoneCP -->
-<!--    <bean name="dataSource" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
-        <property name="driverClass" value="${jdbc.driverClassName}"/>
-        <property name="jdbcUrl" value="${jdbc.url}"/>
-        <property name="username" value="${jdbc.username}"/>
-        <property name="password" value="${jdbc.password}"/>
-        <property name="idleConnectionTestPeriodInMinutes" value="60"/>
-        <property name="idleMaxAgeInMinutes" value="240"/>
-        <property name="maxConnectionsPerPartition" value="10"/>
-        <property name="minConnectionsPerPartition" value="1"/>
-        <property name="partitionCount" value="1"/>
-        <property name="acquireIncrement" value="5"/>
-        <property name="statementsCacheSize" value="100"/>
-    </bean>-->
-    
-
     <!-- Hibernate session factory -->
     <bean name="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-<!--        <property name="dataSource" ref="dataSource" />-->
+        <property name="dataSource" ref="dataSource" />
         <property name="packagesToScan">
             <list>
                 <value>rugal.sample.core.entity</value>
@@ -110,7 +70,7 @@
             <props>
                 <!--<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>-->
                 <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
-                <prop key="hibernate.connection.datasource">java:jboss/datasources/ExampleDS</prop>
+<!--                <prop key="hibernate.connection.datasource">java:jboss/datasources/ExampleDS</prop>-->
                 <!--<prop key="current_session_context_class">thread</prop>-->
                 <!--<prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext</prop>-->
                 <!--<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>-->
