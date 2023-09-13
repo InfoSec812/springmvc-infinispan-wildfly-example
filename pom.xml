@@ -234,6 +234,7 @@
                         <configuration>
                             <jboss-home>${jboss1.home}</jboss-home>
                             <server-config>standalone-full-ha.xml</server-config>
+                            <javaOpts>-Djboss.socket.binding.port-offset=2000 -agentlib:jdwp=transport=dt_socket,address=8787,server=y,suspend=n</javaOpts>
                             <add-user>
                                 <users>
                                     <user>
@@ -253,7 +254,7 @@
                         <configuration>
                             <jboss-home>${jboss2.home}</jboss-home>
                             <server-config>standalone-full-ha.xml</server-config>
-                            <javaOpts>-Djboss.socket.binding.port-offset=2000</javaOpts>
+                            <javaOpts>-Djboss.socket.binding.port-offset=2000 -agentlib:jdwp=transport=dt_socket,address=10787,server=y,suspend=n</javaOpts>
                             <port>11990</port>
                             <add-user>
                                 <users>
