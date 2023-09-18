@@ -7,6 +7,7 @@ public class UpdateElement implements Serializable {
 	public UpdateElement(Long currentTimestamp, String currentUrl) {
 		this.requestTimestamp = currentTimestamp;
 		this.requestUrl = currentUrl;
+		this.nodeId = System.getProperties().getProperty("jboss.node.name");
 	}
 	
 	public String getRequestUrl() {
@@ -25,7 +26,17 @@ public class UpdateElement implements Serializable {
 		this.requestTimestamp = requestTimestamp;
 	}
 	
+	public String getNodeId() {
+		return nodeId;
+	}
+	
+	public void setNodeId(String nodeId) {
+		this.nodeId = nodeId;
+	}
+	
 	String requestUrl;
 	
 	Long requestTimestamp;
+	
+	String nodeId;
 }

@@ -20,6 +20,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <jboss1.home>/home/dphillips/Applications/JBoss/jboss-alpha</jboss1.home>
         <jboss2.home>/home/dphillips/Applications/JBoss/jboss-beta</jboss2.home>
+        <jboss.common.opts>-Djboss.bind.address.private=0.0.0.0</jboss.common.opts>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -225,6 +226,49 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.8</version>
+                <executions>
+                    <execution>
+                        <id>deploy-jboss-alpha</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>${project.groupId}</groupId>
+                                    <artifactId>${project.artifactId}</artifactId>
+                                    <version>${project.version}</version>
+                                    <type>${project.packaging}</type>
+                                </artifactItem>
+                            </artifactItems>
+                            <outputDirectory>/home/dphillips/Applications/JBoss/jboss-alpha/standalone/deployments</outputDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>deploy-jboss-beta</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>${project.groupId}</groupId>
+                                    <artifactId>${project.artifactId}</artifactId>
+                                    <version>${project.version}</version>
+                                    <type>${project.packaging}</type>
+                                </artifactItem>
+                            </artifactItems>
+                            <outputDirectory>/home/dphillips/Applications/JBoss/jboss-beta/standalone/deployments</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
                 <version>4.2.0.Final</version>
@@ -233,8 +277,10 @@
                         <id>jboss01</id>
                         <configuration>
                             <jboss-home>${jboss1.home}</jboss-home>
-                            <server-config>standalone-full-ha.xml</server-config>
-                            <javaOpts>-Djboss.socket.binding.port-offset=2000 -agentlib:jdwp=transport=dt_socket,address=8787,server=y,suspend=n</javaOpts>
+                            <server-config>standalone-full-ha-tcp.xml</server-config>
+                            <javaOpts>${jboss.common.opts} -Djboss.node.name=alpha</javaOpts>
+                            <port>9990</port>
+                            <debugPort>8787</debugPort>
                             <add-user>
                                 <users>
                                     <user>
@@ -253,9 +299,10 @@
                         <id>jboss02</id>
                         <configuration>
                             <jboss-home>${jboss2.home}</jboss-home>
-                            <server-config>standalone-full-ha.xml</server-config>
-                            <javaOpts>-Djboss.socket.binding.port-offset=2000 -agentlib:jdwp=transport=dt_socket,address=10787,server=y,suspend=n</javaOpts>
+                            <server-config>standalone-full-ha-tcp.xml</server-config>
+                            <javaOpts>${jboss.common.opts} -Djboss.node.name=beta -Djboss.socket.binding.port-offset=2000</javaOpts>
                             <port>11990</port>
+                            <debugPort>10787</debugPort>
                             <add-user>
                                 <users>
                                     <user>

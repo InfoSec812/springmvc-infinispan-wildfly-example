@@ -10,6 +10,16 @@ public class CacheCheckResponse implements Serializable {
 	
 	String currentUrl;
 	
+	String nodeId = System.getProperties().getProperty("jboss.node.name");
+	
+	public String getNodeId() {
+		return nodeId;
+	}
+	
+	public void setNodeId(String nodeId) {
+		this.nodeId = nodeId;
+	}
+	
 	public Long getCurrentTimestamp() {
 		return currentTimestamp;
 	}
@@ -35,7 +45,7 @@ public class CacheCheckResponse implements Serializable {
 	}
 	
 	public void addUpdateElement(UpdateElement element) {
-		this.updateElements.add(element);
+		this.updateElements.add(0, element);
 	}
 	
 	List<UpdateElement> updateElements = new ArrayList<>();
