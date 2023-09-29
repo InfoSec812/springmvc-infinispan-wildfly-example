@@ -1,5 +1,7 @@
 package rugal.sample.core.entity;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import java.io.Serializable;
 import javax.persistence.*;
 
@@ -7,11 +9,17 @@ import javax.persistence.*;
  *
  * @author rugal
  */
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.TRANSACTIONAL)
+@Entity
+@Table(name = "students")
 public class Student implements Serializable
 {
 
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
     private String name;

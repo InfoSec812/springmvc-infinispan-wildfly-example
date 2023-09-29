@@ -34,9 +34,19 @@ public class UpdateElement implements Serializable {
 		this.nodeId = nodeId;
 	}
 	
+	public Integer getCreatedStudent() {
+		return createdStudent;
+	}
+	
+	public void setCreatedStudent(Integer createdStudent) {
+		this.createdStudent = createdStudent;
+	}
+	
 	String requestUrl;
 	
 	Long requestTimestamp;
 	
 	String nodeId;
+	
+	Integer createdStudent;
 }
