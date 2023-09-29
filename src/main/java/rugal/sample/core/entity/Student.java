@@ -10,7 +10,7 @@ import javax.persistence.*;
  * @author rugal
  */
 @Cacheable
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.TRANSACTIONAL)
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 @Entity
 @Table(name = "students")
 public class Student implements Serializable
